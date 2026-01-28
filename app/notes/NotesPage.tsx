@@ -10,14 +10,14 @@ import css from './NotesPage.module.css';
 import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
 
-type NotesClientProps = {
+type NotesPageProps = {
     initialPage: number;
     initialSearch: string;
 };
 
 
 
-export default function NotesClient({ initialPage, initialSearch }: NotesClientProps) {
+export default function NotesPage({ initialPage, initialSearch }: NotesPageProps) {
     const [page, setPage] = useState(initialPage);
     const [search, setSearch] = useState(initialSearch);
     const [debouncedSearch] = useDebounce(search, 500);

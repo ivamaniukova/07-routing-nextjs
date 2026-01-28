@@ -9,7 +9,7 @@ type Props = {
     note: Note;
 };
 
-export default function NoteModalClient({ note }: Props) {
+export default function NotePreviewClient({ note }: Props) {
     const router = useRouter();
 
     return (
