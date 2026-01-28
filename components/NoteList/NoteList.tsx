@@ -24,7 +24,7 @@ export default function NoteList({ notes }: NoteListProps) {
             setDeletingId(null);
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['notes'] });
+            queryClient.invalidateQueries({ queryKey: ['notes'], exact: false });
         },
     });
 

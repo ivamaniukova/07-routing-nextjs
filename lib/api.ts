@@ -16,6 +16,7 @@ export interface FetchNotesParams {
     page?: number;
     perPage?: number;
     search?: string;
+    tag?: NoteTag;
 }
 
 export interface FetchNotesResponse {
@@ -39,6 +40,7 @@ export async function fetchNotes(
         page = 1,
         perPage = 12,
         search,
+        tag,
     } = params;
 
     const response = await api.get<FetchNotesResponse>("/notes", {
@@ -46,6 +48,7 @@ export async function fetchNotes(
             page,
             perPage,
             search,
+            ...(tag ? { tag } : {}),
         },
     })
 
