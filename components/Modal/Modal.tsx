@@ -62,7 +62,9 @@ export default function Modal({ isOpen, children, onClose, titleId, descriptionI
         const previousActiveElement = document.activeElement as HTMLElement | null;
         document.addEventListener("keydown", handleKeyDown);
         document.body.style.overflow = "hidden";
-        requestAnimationFrame(() => modalRef.current?.focus());
+        requestAnimationFrame(() => {
+            modalRef.current?.focus({ preventScroll: true } as any);
+        });
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
             document.body.style.overflow = "";

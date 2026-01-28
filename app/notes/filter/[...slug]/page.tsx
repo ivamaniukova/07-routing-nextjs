@@ -4,15 +4,15 @@ import { fetchNotes } from "@/lib/api";
 import NoteList from "@/components/NoteList/NoteList";
 
 type Props = {
-    params: Promise<{ tag: string[] }>;
+    params: Promise<{ slug: string[] }>;
 };
 
 export default async function FilterPage({ params }: Props) {
-    const { tag } = await params;
-    if (tag.length !== 1) {
+    const { slug } = await params;
+    if (slug.length !== 1) {
         notFound();
     }
-    const currentTag = tag?.[0] ?? 'all';
+    const currentTag = slug[0] ?? 'all';
     const tagForApi = currentTag === 'all' ? undefined : (currentTag as NoteTag);
     const data = await fetchNotes({ tag: tagForApi });
     return <NoteList notes={data.notes} />;
