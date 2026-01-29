@@ -1,5 +1,5 @@
-import css from './SidebarNotes.module.css';
 import Link from 'next/link';
+import css from './SidebarNotes.module.css';
 import type { NoteTag } from '@/types/note';
 
 export default function SidebarNotes() {
@@ -8,10 +8,11 @@ export default function SidebarNotes() {
     return (
         <ul className={css.menuList}>
             <li className={css.menuItem}>
-                <Link href={`/notes/filter/all`} className={css.menuLink}>
+                <Link href="/notes/filter/all" className={css.menuLink}>
                     All notes
                 </Link>
             </li>
+
             {tags.map((tag) => (
                 <li key={tag} className={css.menuItem}>
                     <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
@@ -20,6 +21,6 @@ export default function SidebarNotes() {
                 </li>
             ))}
         </ul>
-
     );
 }
+

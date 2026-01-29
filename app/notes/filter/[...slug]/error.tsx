@@ -1,9 +1,15 @@
 'use client';
 
-export default function Error({ error }: { error: Error }) {
+export default function Error({
+    reset,
+}: {
+    error: Error;
+    reset: () => void;
+}) {
     return (
-        <p role="alert">
-            Could not fetch the list of notes. {error.message}
-        </p>
+        <div>
+            <h2>Something went wrong!</h2>
+            <button onClick={() => reset()}>Try again</button>
+        </div>
     );
 }

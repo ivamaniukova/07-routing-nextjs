@@ -9,17 +9,15 @@ import { useDebounce } from "use-debounce";
 import css from './NotesPage.module.css';
 import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
+import type { NoteTag } from '@/types/note';
 
 type NotesPageProps = {
-    initialPage: number;
-    initialSearch: string;
+    tag?: NoteTag | undefined;
 };
 
-
-
-export default function NotesPage({ initialPage, initialSearch }: NotesPageProps) {
-    const [page, setPage] = useState(initialPage);
-    const [search, setSearch] = useState(initialSearch);
+export default function NotesPage({ tag }: NotesPageProps) {
+    const [page, setPage] = useState(1);
+    const [search, setSearch] = useState('');
     const [debouncedSearch] = useDebounce(search, 500);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModal = () => setIsModalOpen(true);
@@ -30,10 +28,9 @@ export default function NotesPage({ initialPage, initialSearch }: NotesPageProps
         setPage(1);
     };
 
-
     const { data, isLoading, isError } = useQuery({
-        queryKey: ["notes", { page, search: debouncedSearch }],
-        queryFn: () => fetchNotes({ page, search: debouncedSearch }),
+        queryKey: ["notes", { page, search: debouncedSearch, tag }],
+        queryFn: () => fetchNotes({ page, search: debouncedSearch, tag }),
         placeholderData: keepPreviousData,
     });
 

@@ -1,3 +1,6 @@
-export default function SidebarDefault() {
-    return <div>Select a tag to filter notes.</div>;
+import SidebarNotes from './SidebarNotes';
+
+export default function Default() {
+    return <SidebarNotes />;
 }
+
