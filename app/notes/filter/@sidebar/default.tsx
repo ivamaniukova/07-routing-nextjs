@@ -1,38 +1,25 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import SidebarNotes from './SidebarNotes';
+import Link from 'next/link';
+import css from './SidebarNotes.module.css';
 import type { NoteTag } from '@/types/note';
 
 export default function Default() {
-    const [tags, setTags] = useState<NoteTag[]>([]);
-    const [activeTag, setActiveTag] = useState<NoteTag | 'all'>('all');
-
-    useEffect(() => {
-        const fetchedTags: NoteTag[] = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
-        setTags(fetchedTags);
-
-        const path = window.location.pathname;
-        const match = path.match(/\/notes\/filter\/(.+)/);
-        if (match && match[1] !== 'all') {
-            setActiveTag(match[1] as NoteTag);
-        }
-    }, []);
-    const handleTagClick = (tag: NoteTag | 'all') => {
-        console.log(`Tag clicked: ${tag}`);
-        setActiveTag(tag);
-
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('lastSelectedTag', tag);
-        }
-    };
+    const tags: NoteTag[] = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
     return (
-        <div>
-            <SidebarNotes
-                tags={tags}
-                onTagClick={handleTagClick}
-            />
-        </div>
+        <ul className={css.menuList}>
+            <li className={css.menuItem}>
+                <Link href="/notes/filter/all" className={css.menuLink}>
+                    All notes
+                </Link>
+            </li>
+
+            {tags.map((tag) => (
+                <li key={tag} className={css.menuItem}>
+                    <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
+                        {tag}
+                    </Link>
+                </li>
+            ))}
+        </ul>
     );
 }

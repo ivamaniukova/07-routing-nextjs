@@ -17,6 +17,7 @@ export default function NotePreviewClient({ noteId }: Props) {
         queryKey: ["note", noteId],
         queryFn: () => fetchNoteById(noteId),
         enabled: !!noteId,
+        refetchOnMount: false,
     });
 
     const handleClose = () => {

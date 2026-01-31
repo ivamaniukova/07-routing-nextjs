@@ -4,34 +4,20 @@ import type { NoteTag } from '@/types/note';
 
 type SidebarNotesProps = {
     tags: NoteTag[];
-    onTagClick?: (tag: NoteTag | 'all') => void;
 };
 
-export default function SidebarNotes({ tags, onTagClick }: SidebarNotesProps) {
-    const handleClick = (tag: NoteTag | 'all', e: React.MouseEvent) => {
-        if (onTagClick) {
-            onTagClick(tag);
-        }
-    };
-
+export default function SidebarNotes({ tags }: SidebarNotesProps) {
     return (
         <ul className={css.menuList}>
             <li className={css.menuItem}>
-                <Link
-                    href="/notes/filter/all"
-                    className={css.menuLink}
-                    onClick={(e) => handleClick('all', e)}
-                >
+                <Link href="/notes/filter/all" className={css.menuLink}>
                     All notes
                 </Link>
             </li>
+
             {tags.map((tag) => (
                 <li key={tag} className={css.menuItem}>
-                    <Link
-                        href={`/notes/filter/${tag}`}
-                        className={css.menuLink}
-                        onClick={(e) => handleClick(tag, e)}
-                    >
+                    <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
                         {tag}
                     </Link>
                 </li>
